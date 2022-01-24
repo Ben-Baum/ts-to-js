@@ -10,7 +10,7 @@ function init() {
         addFruit()
     })
 
-    Promise.race([getAllFish(), getAllFruits()]).then((results) => {
+    Promise.race([getAllFish(), getAllFruits()]).then((results:Array<string>) => {
         console.log(results)
         // drawMiniSuper("fishData", results[0])
         // drawMiniSuper("fruitsData", results[1])
@@ -22,7 +22,7 @@ function init() {
 }
 function addFruit() {
     const fruitsUrl:string = "fruit"
-    const currentFruit:string = $("#searchInput").value
+    const currentFruit:string = $("#searchInput").nodeValue
     const payload:object = { fruit: currentFruit }
     if (!currentFruit) return;
     fetch(`${ApiBaseUrl}/${fruitsUrl}`, {

@@ -50,7 +50,7 @@ function init() {
 }
 function addFruit() {
     var fruitsUrl = "fruit";
-    var currentFruit = $("#searchInput").value;
+    var currentFruit = $("#searchInput").nodeValue;
     var payload = { fruit: currentFruit };
     if (!currentFruit)
         return;
