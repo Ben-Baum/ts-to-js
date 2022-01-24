@@ -19,8 +19,6 @@ function init() {
     })
 
 
-
-
 }
 function addFruit() {
     const fruitsUrl:string = "fruit"
