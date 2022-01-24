@@ -1,13 +1,12 @@
+const $ = document.querySelector
+
+const  ApiBaseUrl:String = `http://localhost:3200`;
 
 
-const ApiBaseUrl = `http://localhost:3200`;
-
-
-$(document).ready(init)
 
 function init() {
 
-    $("#searchButton").on("click", function () {
+    $("#searchButton").addEventListener("click", function () {
         addFruit()
     })
 
@@ -24,9 +23,9 @@ function init() {
 
 }
 function addFruit() {
-    const fruitsUrl = "fruit"
-    const currentFruit = $("#searchInput").val()
-    const payload = { fruit: currentFruit }
+    const fruitsUrl:string = "fruit"
+    const currentFruit:string = $("#searchInput").value
+    const payload:object = { fruit: currentFruit }
     if (!currentFruit) return;
     fetch(`${ApiBaseUrl}/${fruitsUrl}`, {
         method: 'POST',
@@ -40,7 +39,7 @@ function addFruit() {
         return response.json()
     }
 
-    function _addFruitSuccess(message) {
+    function _addFruitSuccess(message:string) {
         popUpSuccessModal()
         getAllFruits()
     }
@@ -49,55 +48,55 @@ function addFruit() {
     }
 }
 async function getAllFruits() {
-    const fruitsUrl = "fruits"
+    const fruitsUrl:string = "fruits"
     try {
         const result = await fetch(`${ApiBaseUrl}/${fruitsUrl}`);
         const resultJson = await result.json()
         return resultJson
         // _loadFruits(resultJson)
-    } catch (error) {
+    } catch (error:any) {
         throw new Error()
         _setError(error)
     }
 
-    function _loadFruits(ArrayOfFruits) {
-        drawMiniSuper("fruitsData", ArrayOfFruits)
+    function _loadFruits(fruitsData:any = "fruitsData", ArrayOfFruits:Array<string>) {
+        drawMiniSuper(fruitsData, ArrayOfFruits)
     }
 
-    function _setError(error) {
+    function _setError(error:any) {
         console.log(error)
     }
 
 }
 
 async function getAllFish() {
-    const fishUrl = "fish"
+    const fishUrl:string = "fish"
     try {
         const result = await fetch(`${ApiBaseUrl}/${fishUrl}`);
         const resultJson = await result.json()
         return resultJson
         // _loadFish(resultJson)
-    } catch (error) {
+    } catch (error:any) {
         throw new Error()
         _setError(error)
     }
 
-    function _loadFish(arrayOfFish) {
-        drawMiniSuper("fishData", arrayOfFish)
+    function _loadFish(fishData:any = "fishData", arrayOfFish:Array<string>) {
+        drawMiniSuper(fishData, arrayOfFish)
     }
 
-    function _setError(error) {
+    function _setError(error:string) {
         console.log(error)
     }
 
 }
 
 
+init()
 
 
 
-
-function drawMiniSuper(category, data) {
+function drawMiniSuper(category:Array<string>, data:Array<string>) {
     if (!Array.isArray(data)) return;
     const content = document.querySelector(`#${category}`)
     const h1List = data.map(msItem => {
@@ -113,14 +112,15 @@ function drawMiniSuper(category, data) {
 
 
 function popUpSuccessModal() {
-    $("#alertModalSuccess").css({ visibility: "visible" })
+    const alert = document.getElementById("alertModalSuccess")
+    alert.style.display = "visible" 
     setTimeout(function () {
-        $("#alertModalSuccess").css({ visibility: "hidden" })
+        alert.style.display =  "hidden" 
     }, 5000);
 }
 
-function printMe(str, options = {}) {
-    const isUpper = options.upper
+function printMe(str:any, options = {}) {
+    const isUpper:object = options
     const whatToPrint = isUpper ? str.toUpperCase() : str
     console.log(whatToPrint)
 }
